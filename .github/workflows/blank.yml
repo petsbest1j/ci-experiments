@@ -9,11 +9,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         code: [0, -1, 1, 2, 3, 127, -128, 255]
+        
     runs-on: ${{ matrix.os }}
     
     steps:
     - uses: actions/checkout@v1
     - name: Try to fail
       run: exit ${{ matrix.code }}
-    - name: Print message if we don't fail
-      run: echo Code ${{ matrix.code }} doesn't fail!
+    - name: Succeeded
+      run: echo No fail for ${{ matrix.code }}
+
