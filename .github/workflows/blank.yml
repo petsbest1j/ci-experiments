@@ -22,6 +22,19 @@ jobs:
     - name: Succeeded
       run: echo No fail for ${{ matrix.code }}
 
+  fail-test-n:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        code: [0, -1, 1, 2, 3, 127, -128, 255]
+        
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v1
+
     - name: Try to fail (n commands)
       run: | 
         exit ${{ matrix.code }}
@@ -29,5 +42,4 @@ jobs:
         
     - name: Succeeded
       run: echo No fail for ${{ matrix.code }}
-
 
