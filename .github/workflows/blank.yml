@@ -15,8 +15,19 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    
     - name: Try to fail
       run: exit ${{ matrix.code }}
+      
     - name: Succeeded
       run: echo No fail for ${{ matrix.code }}
+
+    - name: Try to fail (n commands)
+      run: | 
+        exit ${{ matrix.code }}
+        exit 0
+        
+    - name: Succeeded
+      run: echo No fail for ${{ matrix.code }}
+
 
